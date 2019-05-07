@@ -1,0 +1,265 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string",
+            "minLength": 1
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "resourceNamespace": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceType": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "monitorId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "properties": {
+                                "id": {
+                                    "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "The name of the resource",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags"
+                }
+            ],
+            "description": "Model for Monitor",
+            "properties": {
+                "etag": {
+                    "description": "For optimistic concurrency control.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Properties of monitor instance",
+                    "readOnly": true,
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "alertGeneration": {
+                            "description": "Generates alerts or not",
+                            "enum": [
+                                "Enabled",
+                                "Disabled"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "AlertGeneration"
+                            }
+                        },
+                        "componentTypeDisplayName": {
+                            "description": "Component Type Display Name of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "componentTypeId": {
+                            "description": "Component Type Id of monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "componentTypeName": {
+                            "description": "Component Type Name of monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "criteria": {
+                            "description": "Collection of MonitorCriteria. For PATCH calls, instead of partial list, complete list of expected criteria should be passed for proper updating.",
+                            "items": {
+                                "description": "Criteria for monitor configuration",
+                                "properties": {
+                                    "comparisonOperator": {
+                                        "description": "Comparison enum on threshold of this criteria",
+                                        "enum": [
+                                            "Equals",
+                                            "GreaterThan",
+                                            "GreaterThanOrEqual",
+                                            "LessThan",
+                                            "LessThanOrEqual",
+                                            "NotEquals"
+                                        ],
+                                        "readOnly": true,
+                                        "type": "string",
+                                        "x-ms-enum": {
+                                            "modelAsString": false,
+                                            "name": "Operator"
+                                        }
+                                    },
+                                    "healthState": {
+                                        "description": "Target health state of the criteria",
+                                        "enum": [
+                                            "Error",
+                                            "Warning",
+                                            "Success",
+                                            "Unknown",
+                                            "Uninitialized"
+                                        ],
+                                        "readOnly": true,
+                                        "type": "string",
+                                        "x-ms-enum": {
+                                            "modelAsString": false,
+                                            "name": "HealthState"
+                                        }
+                                    },
+                                    "threshold": {
+                                        "description": "Threshold value for this criteria",
+                                        "format": "double",
+                                        "readOnly": true,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "readOnly": true,
+                            "type": "array"
+                        },
+                        "description": {
+                            "description": "Description of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "documentationURL": {
+                            "description": "URL pointing to the documentation of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "description": "Frequency at which monitor condition is evaluated",
+                            "format": "int32",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "lookbackDuration": {
+                            "description": "The duration in minutes in the past during which the monitor is evaluated",
+                            "format": "int32",
+                            "readOnly": true,
+                            "type": "integer"
+                        },
+                        "monitorCategory": {
+                            "description": "Category of the monitor",
+                            "enum": [
+                                "AvailabilityHealth",
+                                "Configuration",
+                                "EntityHealth",
+                                "PerformanceHealth",
+                                "Security"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "MonitorCategory"
+                            }
+                        },
+                        "monitorDisplayName": {
+                            "description": "User friendly display name of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "monitorId": {
+                            "description": "ID of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "monitorName": {
+                            "description": "Name of the monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "monitorState": {
+                            "description": "Is the monitor state enabled or disabled",
+                            "enum": [
+                                "Enabled",
+                                "Disabled"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "MonitorState"
+                            }
+                        },
+                        "monitorType": {
+                            "description": "Type of the monitor",
+                            "enum": [
+                                "Aggregate",
+                                "Dependency",
+                                "Unit"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "MonitorType"
+                            }
+                        },
+                        "parentMonitorDisplayName": {
+                            "description": "User friendly display name of the parent monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "parentMonitorName": {
+                            "description": "Name of the parent monitor",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "signalName": {
+                            "description": "Name of the signal on which this monitor is configured.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "signalType": {
+                            "description": "Type of the signal on which this monitor is configured.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-08-31-preview"
+            ]
+        }
+    }
+}

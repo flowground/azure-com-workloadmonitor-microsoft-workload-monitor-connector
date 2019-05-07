@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-08-31-preview"
+            ]
+        },
+        "_skiptoken": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
